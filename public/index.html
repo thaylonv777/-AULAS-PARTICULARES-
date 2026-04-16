@@ -253,6 +253,13 @@
       flex-shrink: 0;
     }
 
+    @media (max-width: 600px) {
+      .foto-wrapper {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
     /* Foto circular */
     .foto-placeholder {
       width: 100%;
@@ -406,10 +413,19 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding-top: 80px;
+      padding-top: 100px;
+      padding-bottom: 40px;
       background: var(--gradient-dark);
       position: relative;
       overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        min-height: auto;
+        padding-top: 90px;
+        padding-bottom: 30px;
+      }
     }
 
     .hero::before {
@@ -432,6 +448,12 @@
       text-align: center;
       position: relative;
       z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      .hero-content {
+        gap: 25px;
+      }
     }
 
     .hero-text {
