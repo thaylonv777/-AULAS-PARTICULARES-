@@ -32,6 +32,15 @@
       --accent-glow: rgba(81, 181, 187, 0.3);
       --border-color: #30363d;
       --gradient-dark: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+      /* Cores para CTAs de compra */
+      --cta-green: #22c55e;
+      --cta-green-dark: #16a34a;
+      --cta-green-glow: rgba(34, 197, 94, 0.3);
+      /* Cores Google Ads */
+      --google-blue: #4285f4;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc05;
+      --google-green: #34a853;
     }
 
     html {
@@ -110,13 +119,149 @@
       color: #15191f;
     }
 
-    /* Placeholder de foto */
+    .btn-cta {
+      background-color: var(--cta-green);
+      color: #ffffff;
+    }
+
+    .btn-cta:hover {
+      background-color: var(--cta-green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--cta-green-glow);
+    }
+
+    /* Linhas horizontais decorativas Google Ads */
+    .google-line {
+      height: 4px;
+      background: linear-gradient(90deg, var(--google-blue) 0%, var(--google-yellow) 50%, var(--google-green) 100%);
+      border-radius: 2px;
+    }
+
+    .google-line-full {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .google-line-medium {
+      width: 200px;
+    }
+
+    .google-line-small {
+      width: 80px;
+    }
+
+    .google-line-left {
+      margin-right: auto;
+      margin-left: 0;
+    }
+
+    .google-line-right {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .google-line-center {
+      margin: 0 auto;
+    }
+
+    /* Logos em destaque */
+    .platform-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      margin: 30px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .platform-logos img {
+      height: 50px;
+      width: auto;
+      opacity: 0.9;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    .platform-logos img:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .platform-logos .meta-logo {
+      height: 60px;
+    }
+
+    .platform-logos-small img {
+      height: 35px;
+    }
+
+    .platform-logos-small .meta-logo {
+      height: 45px;
+    }
+
+    @media (max-width: 600px) {
+      .platform-logos img {
+        height: 40px;
+      }
+      .platform-logos .meta-logo {
+        height: 50px;
+      }
+      .platform-logos-small img {
+        height: 28px;
+      }
+      .platform-logos-small .meta-logo {
+        height: 35px;
+      }
+      .google-line-medium {
+        width: 120px;
+      }
+    }
+
+    /* Logos no header */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icons img {
+      height: 28px;
+      width: auto;
+    }
+
+    @media (max-width: 600px) {
+      .logo-icons img {
+        height: 22px;
+      }
+    }
+
+    /* Wrapper com borda gradiente Google Ads */
+    .foto-wrapper {
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--google-blue) 0%, var(--google-yellow) 50%, var(--google-green) 100%);
+      padding: 5px;
+      flex-shrink: 0;
+    }
+
+    /* Foto circular */
     .foto-placeholder {
-      width: 280px;
-      height: 280px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       background-color: var(--bg-card);
-      border: 3px solid var(--accent);
+    }
+
+    .foto-placeholder {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -124,11 +269,6 @@
       font-size: 0.9rem;
       text-align: center;
       flex-shrink: 0;
-      /* Para trocar por imagem, adicione:
-         background-image: url('caminho-da-foto.jpg');
-         background-size: cover;
-         background-position: center;
-         E remova o texto interno */
     }
 
     /* Animações */
@@ -983,7 +1123,13 @@
   ======================================== -->
   <header class="header">
     <div class="container header-content">
-      <a href="#" class="logo">Thaylon <span>|</span> Tráfego Pago</a>
+      <div class="logo-container">
+        <a href="#" class="logo">Thaylon <span>|</span> Aulas Particulares</a>
+        <div class="logo-icons">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
+        </div>
+      </div>
       
       <nav class="nav">
         <ul class="nav-list">
@@ -1018,7 +1164,7 @@
     <div class="container hero-content">
       <div class="hero-text fade-up">
         <h1 class="hero-title">
-          Aprenda a Gerar Clientes com <span class="accent">Tráfego Pago</span> — do Zero, no Seu Ritmo
+          Aula Particular <span class="accent">Tráfego Pago</span> do Zero ao Avançado
         </h1>
         <p class="hero-subtitle">
           Aulas particulares e ao vivo via Zoom, com metodologia própria que já ajudou dezenas de empreendedores a dominarem Meta Ads e Google Ads com autonomia total.
@@ -1047,10 +1193,21 @@
       </div>
       
 <!-- Foto do Thaylon -->
-  <div class="foto-placeholder fade-up" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8404-ZxtqlfEbVELxRCwpIcaUSWvTHDow4K.jpg'); background-size: cover; background-position: center top;">
+  <div class="foto-wrapper fade-up">
+    <div class="foto-placeholder" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8404-ZxtqlfEbVELxRCwpIcaUSWvTHDow4K.jpg'); background-size: cover; background-position: center top;">
+    </div>
   </div>
   </div>
+    
+    <!-- Logos das plataformas -->
+    <div class="platform-logos fade-up">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
+    </div>
   </section>
+
+  <!-- Linha horizontal Google colors -->
+  <div class="google-line google-line-full"></div>
 
   <!-- ========================================
        STRIP / BANNER
@@ -1108,16 +1265,6 @@
           </div>
           <h3 class="card-title">Configuração do Pixel</h3>
           <p class="card-text">Instale e configure o pixel corretamente para rastrear conversões e criar públicos poderosos.</p>
-        </div>
-
-        <div class="card fade-up">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
-          <h3 class="card-title">Página de Captura</h3>
-          <p class="card-text">Crie páginas que convertem visitantes em leads qualificados prontos para comprar.</p>
         </div>
 
         <div class="card fade-up">
@@ -1204,12 +1351,23 @@
     </div>
   </section>
 
+  <!-- Linha horizontal menor - lado esquerdo -->
+  <div style="padding: 20px 0;">
+    <div class="google-line google-line-medium google-line-left" style="margin-left: 5%;"></div>
+  </div>
+
   <!-- ========================================
        PLANOS E PREÇOS
   ======================================== -->
   <section id="planos" class="section planos">
     <div class="container">
       <h2 class="section-title fade-up">Escolha o Melhor Plano <span class="accent">para Você</span></h2>
+      
+      <!-- Logos das plataformas -->
+      <div class="platform-logos platform-logos-small fade-up" style="margin-bottom: 40px;">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
+      </div>
       
       <div class="planos-grid">
         <!-- Plano Intermediário -->
@@ -1219,7 +1377,7 @@
             <p class="plano-preco-antigo">De R$ 747,00</p>
             <p class="plano-preco-atual"><span>R$</span> 647</p>
           </div>
-          <p class="plano-descricao">3 aulas de 1 hora cada</p>
+          <p class="plano-descricao">3 aulas de ate 1 hora cada</p>
           <ul class="plano-itens">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -1246,7 +1404,7 @@
               Suporte WhatsApp por 15 dias
             </li>
           </ul>
-          <a href="#" class="btn btn-secondary">Comprar Agora</a>
+          <a href="#" class="btn btn-cta">Comprar Agora</a>
         </div>
 
         <!-- Plano Avançado (Destaque) -->
@@ -1257,7 +1415,7 @@
             <p class="plano-preco-antigo">De R$ 1.237,00</p>
             <p class="plano-preco-atual"><span>R$</span> 997</p>
           </div>
-          <p class="plano-descricao">5 aulas de 1 hora cada</p>
+          <p class="plano-descricao">5 aulas de ate 1 hora cada</p>
           <ul class="plano-itens">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -1290,7 +1448,7 @@
               Checklist de lançamento de campanha
             </li>
           </ul>
-          <a href="#" class="btn btn-primary">Comprar Agora</a>
+          <a href="#" class="btn btn-cta">Comprar Agora</a>
         </div>
 
         <!-- Plano Master -->
@@ -1300,7 +1458,7 @@
             <p class="plano-preco-antigo">De R$ 2.470,00</p>
             <p class="plano-preco-atual"><span>R$</span> 1.897</p>
           </div>
-          <p class="plano-descricao">10 aulas de 1 hora cada</p>
+          <p class="plano-descricao">10 aulas de ate 1 hora cada</p>
           <ul class="plano-itens">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -1336,54 +1494,10 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              Mentoria de acompanhamento mensal
+              Mentoria de acompanhamento no WhatsApp do grupo por ate 3 meses
             </li>
           </ul>
-          <a href="#" class="btn btn-secondary">Comprar Agora</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================
-       DEPOIMENTOS
-  ======================================== -->
-  <section id="depoimentos" class="section depoimentos">
-    <div class="container">
-      <h2 class="section-title fade-up">O Que Estão <span class="accent">Dizendo</span></h2>
-      
-      <div class="depoimentos-grid">
-        <div class="depoimento-card fade-up">
-          <p class="depoimento-texto">Nunca imaginei que conseguiria rodar meus próprios anúncios. As aulas do Thaylon são diretas, sem enrolação, e em poucas semanas já estava gerando leads qualificados para minha clínica.</p>
-          <div class="depoimento-autor">
-            <div class="depoimento-avatar foto-placeholder">Foto</div>
-            <div class="depoimento-info">
-              <h4>Ana Beatriz</h4>
-              <p>Dentista</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="depoimento-card fade-up">
-          <p class="depoimento-texto">O suporte pelo WhatsApp fez toda a diferença. Sempre que travava em alguma configuração, o Thaylon respondia rápido e resolvia minha dúvida. Recomendo demais para quem quer aprender de verdade.</p>
-          <div class="depoimento-autor">
-            <div class="depoimento-avatar foto-placeholder">Foto</div>
-            <div class="depoimento-info">
-              <h4>Carlos Eduardo</h4>
-              <p>Dono de E-commerce</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="depoimento-card fade-up">
-          <p class="depoimento-texto">Já tinha feito cursos online, mas nada se compara a ter alguém olhando para o meu negócio de forma individual. Aprendi a otimizar campanhas e reduzi meu custo por lead pela metade.</p>
-          <div class="depoimento-autor">
-            <div class="depoimento-avatar foto-placeholder">Foto</div>
-            <div class="depoimento-info">
-              <h4>Juliana Mendes</h4>
-              <p>Afiliada Digital</p>
-            </div>
-          </div>
+          <a href="#" class="btn btn-cta">Comprar Agora</a>
         </div>
       </div>
     </div>
@@ -1457,7 +1571,9 @@
     <div class="container">
       <div class="sobre-content">
 <!-- Foto do Thaylon -->
-  <div class="foto-placeholder sobre-foto fade-up" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8511.JPG-84nbMTzaacRf1SqVEFfdPLbMqQbZsl.jpeg'); background-size: cover; background-position: center top;">
+  <div class="foto-wrapper sobre-foto fade-up">
+    <div class="foto-placeholder" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8511.JPG-84nbMTzaacRf1SqVEFfdPLbMqQbZsl.jpeg'); background-size: cover; background-position: center 20%;">
+    </div>
   </div>
         
         <div class="sobre-texto fade-up">
@@ -1477,38 +1593,36 @@
           <a href="#planos" class="btn btn-primary">Quero Aprender com Thaylon</a>
         </div>
       </div>
+      
+      <!-- Logos das plataformas -->
+      <div class="platform-logos platform-logos-small fade-up" style="margin-top: 60px;">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
+      </div>
     </div>
   </section>
+
+  <!-- Linha horizontal final -->
+  <div class="google-line google-line-full"></div>
 
   <!-- ========================================
        FOOTER
   ======================================== -->
   <footer class="footer">
     <div class="container footer-content">
-      <p class="footer-logo">Thaylon <span>|</span> Tráfego Pago</p>
-      
-      <div class="footer-links">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-      </div>
+      <p class="footer-logo">Thaylon <span>|</span> Aulas Particulares</p>
       
       <div class="footer-social">
         <!-- Instagram -->
-        <a href="#" aria-label="Instagram">
+        <a href="https://www.instagram.com/thaylon.vieira___?igsh=MWQzbm03MGNwZjY2" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
-        <!-- Facebook -->
-        <a href="#" aria-label="Facebook">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-        </a>
         <!-- YouTube -->
-        <a href="#" aria-label="YouTube">
+        <a href="https://youtube.com/@atrioassessoria?si=toAyf5rmuoMUE8Ge" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
             <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
@@ -1516,7 +1630,7 @@
         </a>
       </div>
       
-      <p class="footer-copy">&copy; 2025 Thaylon. Todos os direitos reservados.</p>
+      <p class="footer-copy">&copy; 2026 Thaylon. Todos os direitos reservados.</p>
     </div>
   </footer>
 
