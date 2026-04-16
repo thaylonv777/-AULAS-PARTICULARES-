@@ -169,7 +169,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
       margin: 30px 0;
     }
 
@@ -185,16 +185,30 @@
       transform: scale(1.05);
     }
 
+    .platform-logos .meta-logo {
+      height: 60px;
+    }
+
     .platform-logos-small img {
       height: 35px;
+    }
+
+    .platform-logos-small .meta-logo {
+      height: 45px;
     }
 
     @media (max-width: 600px) {
       .platform-logos img {
         height: 40px;
       }
+      .platform-logos .meta-logo {
+        height: 50px;
+      }
       .platform-logos-small img {
         height: 28px;
+      }
+      .platform-logos-small .meta-logo {
+        height: 35px;
       }
       .google-line-medium {
         width: 120px;
@@ -225,13 +239,30 @@
       }
     }
 
-    /* Placeholder de foto */
+    /* Placeholder de foto com borda gradiente Google Ads */
     .foto-placeholder {
       width: 280px;
       height: 280px;
       border-radius: 50%;
       background-color: var(--bg-card);
-      border: 3px solid var(--accent);
+      border: 4px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+
+    .foto-placeholder::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--google-blue) 0%, var(--google-red) 33%, var(--google-yellow) 66%, var(--google-green) 100%);
+      z-index: -1;
+    }
+
+    .foto-placeholder {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -239,11 +270,6 @@
       font-size: 0.9rem;
       text-align: center;
       flex-shrink: 0;
-      /* Para trocar por imagem, adicione:
-         background-image: url('caminho-da-foto.jpg');
-         background-size: cover;
-         background-position: center;
-         E remova o texto interno */
     }
 
     /* Animações */
@@ -1101,7 +1127,7 @@
       <div class="logo-container">
         <a href="#" class="logo">Thaylon <span>|</span> Aulas Particulares</a>
         <div class="logo-icons">
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo-99gWkJvW4KI3kDZj5vkPasuTtnNtPE.png" alt="Meta Ads">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
           <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
         </div>
       </div>
@@ -1174,7 +1200,7 @@
     
     <!-- Logos das plataformas -->
     <div class="platform-logos fade-up">
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo-99gWkJvW4KI3kDZj5vkPasuTtnNtPE.png" alt="Meta Ads">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
       <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
     </div>
   </section>
@@ -1338,7 +1364,7 @@
       
       <!-- Logos das plataformas -->
       <div class="platform-logos platform-logos-small fade-up" style="margin-bottom: 40px;">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo-99gWkJvW4KI3kDZj5vkPasuTtnNtPE.png" alt="Meta Ads">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
         <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
       </div>
       
@@ -1616,7 +1642,7 @@
       
       <!-- Logos das plataformas -->
       <div class="platform-logos platform-logos-small fade-up" style="margin-top: 60px;">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo-99gWkJvW4KI3kDZj5vkPasuTtnNtPE.png" alt="Meta Ads">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
         <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
       </div>
     </div>
