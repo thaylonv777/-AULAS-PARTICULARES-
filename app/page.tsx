@@ -1,19 +1,61 @@
+"use client"
+
+import { useEffect } from "react"
+
 export default function Home() {
+  useEffect(() => {
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector('.mobile-toggle')
+    const mobileMenu = document.querySelector('.mobile-menu')
+    const mobileLinks = document.querySelectorAll('.mobile-menu-link')
+    
+    mobileToggle?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('active')
+    })
+    
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.remove('active')
+      })
+    })
+
+    // Fade up animation
+    const fadeElements = document.querySelectorAll('.fade-up')
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }
+    
+    const fadeObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, observerOptions)
+    
+    fadeElements.forEach(element => {
+      fadeObserver.observe(element)
+    })
+
+    // Header scroll effect
+    const header = document.querySelector('.header') as HTMLElement
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        header.style.backgroundColor = 'rgba(13, 17, 23, 0.98)'
+      } else {
+        header.style.backgroundColor = 'rgba(13, 17, 23, 0.95)'
+      }
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <html lang="pt-BR">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Aulas particulares de tráfego pago com Thaylon. Aprenda Meta Ads e Google Ads do zero ao avançado com metodologia própria e suporte individual." />
-        <title>Thaylon | Aulas de Tráfego Pago - Do Zero ao Avançado</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
-      </head>
-      <body
-        dangerouslySetInnerHTML={{
-          __html: `
-<style>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg-primary: #0d1117;
@@ -171,289 +213,267 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-primary); 
 .footer-social a:hover { border-color: var(--accent); color: var(--accent); }
 .footer-social svg { width: 20px; height: 20px; }
 .footer-copy { font-size: 0.85rem; color: var(--text-secondary); margin-top: 15px; }
-</style>
+      ` }} />
 
-<header class="header">
-  <div class="container header-content">
-    <div class="logo-container">
-      <a href="#" class="logo">Thaylon <span>|</span> Aulas Particulares</a>
-      <div class="logo-icons">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
-      </div>
-    </div>
-    <nav class="nav">
-      <ul class="nav-list">
-        <li><a href="#aprender" class="nav-link">O que você vai aprender</a></li>
-        <li><a href="#planos" class="nav-link">Planos</a></li>
-        <li><a href="#sobre" class="nav-link">Sobre</a></li>
-      </ul>
-    </nav>
-    <button class="mobile-toggle" aria-label="Abrir menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-  <div class="mobile-menu">
-    <ul class="mobile-menu-list">
-      <li><a href="#aprender" class="mobile-menu-link">O que você vai aprender</a></li>
-      <li><a href="#planos" class="mobile-menu-link">Planos</a></li>
-      <li><a href="#sobre" class="mobile-menu-link">Sobre</a></li>
-    </ul>
-  </div>
-</header>
+      <header className="header">
+        <div className="container header-content">
+          <div className="logo-container">
+            <a href="#" className="logo">Thaylon <span>|</span> Aulas Particulares</a>
+            <div className="logo-icons">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" className="meta-logo" />
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads" />
+            </div>
+          </div>
+          <nav className="nav">
+            <ul className="nav-list">
+              <li><a href="#aprender" className="nav-link">O que voce vai aprender</a></li>
+              <li><a href="#planos" className="nav-link">Planos</a></li>
+              <li><a href="#sobre" className="nav-link">Sobre</a></li>
+            </ul>
+          </nav>
+          <button className="mobile-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div className="mobile-menu">
+          <ul className="mobile-menu-list">
+            <li><a href="#aprender" className="mobile-menu-link">O que voce vai aprender</a></li>
+            <li><a href="#planos" className="mobile-menu-link">Planos</a></li>
+            <li><a href="#sobre" className="mobile-menu-link">Sobre</a></li>
+          </ul>
+        </div>
+      </header>
 
-<section class="hero">
-  <div class="container hero-content">
-    <div class="hero-text fade-up">
-      <h1 class="hero-title">Aula Particular <span class="accent">Tráfego Pago</span> do Zero ao Avançado</h1>
-      <p class="hero-subtitle">Aulas particulares e ao vivo via Zoom, com metodologia própria que já ajudou dezenas de empreendedores a dominarem Meta Ads e Google Ads com autonomia total.</p>
-      <ul class="hero-features">
-        <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas individuais e 100% personalizadas</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte direto pelo WhatsApp entre aulas</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio completo incluso</li>
-      </ul>
-      <a href="#planos" class="btn btn-primary">Quero Começar Agora</a>
-    </div>
-    <div class="foto-wrapper fade-up">
-      <div class="foto-placeholder" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8404-ZxtqlfEbVELxRCwpIcaUSWvTHDow4K.jpg'); background-size: cover; background-position: center top;"></div>
-    </div>
-  </div>
-  <div class="platform-logos fade-up">
-    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
-    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
-  </div>
-</section>
+      <section className="hero">
+        <div className="container hero-content">
+          <div className="hero-text fade-up">
+            <h1 className="hero-title">Aula Particular <span className="accent">Trafego Pago</span> do Zero ao Avancado</h1>
+            <p className="hero-subtitle">Aulas particulares e ao vivo via Zoom, com metodologia propria que ja ajudou dezenas de empreendedores a dominarem Meta Ads e Google Ads com autonomia total.</p>
+            <ul className="hero-features">
+              <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas individuais e 100% personalizadas</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte direto pelo WhatsApp entre aulas</li>
+              <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio completo incluso</li>
+            </ul>
+            <a href="#planos" className="btn btn-primary">Quero Comecar Agora</a>
+          </div>
+          <div className="foto-wrapper fade-up">
+            <div className="foto-placeholder" style={{ backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8404-ZxtqlfEbVELxRCwpIcaUSWvTHDow4K.jpg')", backgroundSize: "cover", backgroundPosition: "center top" }}></div>
+          </div>
+        </div>
+        <div className="platform-logos fade-up">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" className="meta-logo" />
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads" />
+        </div>
+      </section>
 
-<div class="google-line google-line-full"></div>
+      <div className="google-line google-line-full"></div>
 
-<section class="strip">
-  <div class="container strip-content">
-    <p class="strip-text">Vagas limitadas para atendimento individual. Garanta a sua agora.</p>
-    <a href="#planos" class="btn btn-secondary">Ver Planos Disponíveis</a>
-  </div>
-</section>
+      <section className="strip">
+        <div className="container strip-content">
+          <p className="strip-text">Vagas limitadas para atendimento individual. Garanta a sua agora.</p>
+          <a href="#planos" className="btn btn-secondary">Ver Planos Disponiveis</a>
+        </div>
+      </section>
 
-<section id="aprender" class="section aprender">
-  <div class="container">
-    <h2 class="section-title fade-up">O Que Você Vai <span class="accent">Aprender</span></h2>
-    <div class="cards-grid">
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg></div>
-        <h3 class="card-title">Criação de Campanhas</h3>
-        <p class="card-text">Monte campanhas do zero com estrutura profissional, otimizadas para conversão desde o primeiro dia.</p>
-      </div>
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
-        <h3 class="card-title">Tipos de Anúncios</h3>
-        <p class="card-text">Domine anúncios de vendas, engajamento, seguidores e geração de leads para cada objetivo.</p>
-      </div>
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg></div>
-        <h3 class="card-title">Métricas e Escalada</h3>
-        <p class="card-text">Aprenda a ler os dados que importam e saiba exatamente quando e como escalar seus resultados.</p>
-      </div>
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></div>
-        <h3 class="card-title">Configuração do Pixel</h3>
-        <p class="card-text">Instale e configure o pixel corretamente para rastrear conversões e criar públicos poderosos.</p>
-      </div>
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
-        <h3 class="card-title">Teste e Validação</h3>
-        <p class="card-text">Metodologia para testar criativos, públicos e ofertas até encontrar a combinação vencedora.</p>
-      </div>
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg></div>
-        <h3 class="card-title">Contingência e Segurança</h3>
-        <p class="card-text">Proteja suas contas contra bloqueios e aprenda estratégias de contingência profissional.</p>
-      </div>
-      <div class="card fade-up">
-        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></div>
-        <h3 class="card-title">Google Ads</h3>
-        <p class="card-text">Domine a rede de pesquisa e display para capturar clientes que já estão buscando sua solução.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <section id="aprender" className="section aprender">
+        <div className="container">
+          <h2 className="section-title fade-up">O Que Voce Vai <span className="accent">Aprender</span></h2>
+          <div className="cards-grid">
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg></div>
+              <h3 className="card-title">Criacao de Campanhas</h3>
+              <p className="card-text">Monte campanhas do zero com estrutura profissional, otimizadas para conversao desde o primeiro dia.</p>
+            </div>
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
+              <h3 className="card-title">Tipos de Anuncios</h3>
+              <p className="card-text">Domine anuncios de vendas, engajamento, seguidores e geracao de leads para cada objetivo.</p>
+            </div>
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg></div>
+              <h3 className="card-title">Metricas e Escalada</h3>
+              <p className="card-text">Aprenda a ler os dados que importam e saiba exatamente quando e como escalar seus resultados.</p>
+            </div>
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></div>
+              <h3 className="card-title">Configuracao do Pixel</h3>
+              <p className="card-text">Instale e configure o pixel corretamente para rastrear conversoes e criar publicos poderosos.</p>
+            </div>
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
+              <h3 className="card-title">Teste e Validacao</h3>
+              <p className="card-text">Metodologia para testar criativos, publicos e ofertas ate encontrar a combinacao vencedora.</p>
+            </div>
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg></div>
+              <h3 className="card-title">Contingencia e Seguranca</h3>
+              <p className="card-text">Proteja suas contas contra bloqueios e aprenda estrategias de contingencia profissional.</p>
+            </div>
+            <div className="card fade-up">
+              <div className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></div>
+              <h3 className="card-title">Google Ads</h3>
+              <p className="card-text">Domine a rede de pesquisa e display para capturar clientes que ja estao buscando sua solucao.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="section para-quem">
-  <div class="container">
-    <h2 class="section-title fade-up">Para Quem É <span class="accent">Esta Aula</span></h2>
-    <div class="perfis-grid">
-      <div class="perfil-card fade-up">
-        <div class="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
-        <h3 class="perfil-title">Empreendedor</h3>
-        <p class="perfil-text">Você quer parar de depender de terceiros e assumir o controle total da aquisição de clientes do seu negócio.</p>
-      </div>
-      <div class="perfil-card fade-up">
-        <div class="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
-        <h3 class="perfil-title">Profissional Liberal</h3>
-        <p class="perfil-text">Médicos, advogados, dentistas e consultores que querem lotar sua agenda com clientes qualificados todos os meses.</p>
-      </div>
-      <div class="perfil-card fade-up">
-        <div class="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg></div>
-        <h3 class="perfil-title">Negócio Local</h3>
-        <p class="perfil-text">Lojas, restaurantes e prestadores de serviço que precisam atrair clientes da região de forma consistente.</p>
-      </div>
-      <div class="perfil-card fade-up">
-        <div class="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></div>
-        <h3 class="perfil-title">Afiliado</h3>
-        <p class="perfil-text">Você quer aprender a criar campanhas lucrativas para vender produtos digitais e físicos como afiliado.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <section className="section para-quem">
+        <div className="container">
+          <h2 className="section-title fade-up">Para Quem E <span className="accent">Esta Aula</span></h2>
+          <div className="perfis-grid">
+            <div className="perfil-card fade-up">
+              <div className="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
+              <h3 className="perfil-title">Empreendedor</h3>
+              <p className="perfil-text">Voce quer parar de depender de terceiros e assumir o controle total da aquisicao de clientes do seu negocio.</p>
+            </div>
+            <div className="perfil-card fade-up">
+              <div className="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
+              <h3 className="perfil-title">Profissional Liberal</h3>
+              <p className="perfil-text">Medicos, advogados, dentistas e consultores que querem lotar sua agenda com clientes qualificados todos os meses.</p>
+            </div>
+            <div className="perfil-card fade-up">
+              <div className="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg></div>
+              <h3 className="perfil-title">Negocio Local</h3>
+              <p className="perfil-text">Lojas, restaurantes e prestadores de servico que precisam atrair clientes da regiao de forma consistente.</p>
+            </div>
+            <div className="perfil-card fade-up">
+              <div className="perfil-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></div>
+              <h3 className="perfil-title">Afiliado</h3>
+              <p className="perfil-text">Voce quer aprender a criar campanhas lucrativas para vender produtos digitais e fisicos como afiliado.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div style="padding: 20px 0;"><div class="google-line google-line-medium google-line-left" style="margin-left: 5%;"></div></div>
+      <div style={{ padding: "20px 0" }}><div className="google-line google-line-medium google-line-left" style={{ marginLeft: "5%" }}></div></div>
 
-<section id="planos" class="section planos">
-  <div class="container">
-    <h2 class="section-title fade-up">Escolha o Melhor Plano <span class="accent">para Você</span></h2>
-    <div class="platform-logos platform-logos-small fade-up" style="margin-bottom: 40px;">
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
-    </div>
-    <div class="planos-grid">
-      <div class="plano-card fade-up">
-        <h3 class="plano-nome">Plano Intermediário</h3>
-        <div class="plano-preco"><p class="plano-preco-antigo">De R$ 747,00</p><p class="plano-preco-atual"><span>R$</span> 647</p></div>
-        <p class="plano-descricao">3 aulas de até 1 hora cada</p>
-        <ul class="plano-itens">
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas ao vivo e individuais via Zoom</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Gravação de todas as aulas</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio em PDF</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte WhatsApp por 15 dias</li>
-        </ul>
-        <a href="#" class="btn btn-cta">Comprar Agora</a>
-      </div>
-      <div class="plano-card destaque fade-up">
-        <span class="plano-badge">Mais Popular</span>
-        <h3 class="plano-nome">Plano Avançado</h3>
-        <div class="plano-preco"><p class="plano-preco-antigo">De R$ 1.237,00</p><p class="plano-preco-atual"><span>R$</span> 997</p></div>
-        <p class="plano-descricao">5 aulas de até 1 hora cada</p>
-        <ul class="plano-itens">
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas ao vivo e individuais via Zoom</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Gravação de todas as aulas</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio completo em PDF</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte WhatsApp por 30 dias</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Checklist de lançamento de campanha</li>
-        </ul>
-        <a href="#" class="btn btn-cta">Comprar Agora</a>
-      </div>
-      <div class="plano-card fade-up">
-        <h3 class="plano-nome">Plano Master</h3>
-        <div class="plano-preco"><p class="plano-preco-antigo">De R$ 2.470,00</p><p class="plano-preco-atual"><span>R$</span> 1.897</p></div>
-        <p class="plano-descricao">10 aulas de até 1 hora cada</p>
-        <ul class="plano-itens">
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas ao vivo e individuais via Zoom</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Gravação de todas as aulas</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio completo em PDF</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte WhatsApp por 60 dias</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Checklist + Templates de anúncios</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Mentoria de acompanhamento no WhatsApp do grupo por até 3 meses</li>
-        </ul>
-        <a href="#" class="btn btn-cta">Comprar Agora</a>
-      </div>
-    </div>
-  </div>
-</section>
+      <section id="planos" className="section planos">
+        <div className="container">
+          <h2 className="section-title fade-up">Escolha o Melhor Plano <span className="accent">para Voce</span></h2>
+          <div className="platform-logos platform-logos-small fade-up" style={{ marginBottom: "40px" }}>
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" className="meta-logo" />
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads" />
+          </div>
+          <div className="planos-grid">
+            <div className="plano-card fade-up">
+              <h3 className="plano-nome">Plano Intermediario</h3>
+              <div className="plano-preco"><p className="plano-preco-antigo">De R$ 747,00</p><p className="plano-preco-atual"><span>R$</span> 647</p></div>
+              <p className="plano-descricao">3 aulas de ate 1 hora cada</p>
+              <ul className="plano-itens">
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas ao vivo e individuais via Zoom</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Gravacao de todas as aulas</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio em PDF</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte WhatsApp por 15 dias</li>
+              </ul>
+              <a href="#" className="btn btn-cta">Comprar Agora</a>
+            </div>
+            <div className="plano-card destaque fade-up">
+              <span className="plano-badge">Mais Popular</span>
+              <h3 className="plano-nome">Plano Avancado</h3>
+              <div className="plano-preco"><p className="plano-preco-antigo">De R$ 1.237,00</p><p className="plano-preco-atual"><span>R$</span> 997</p></div>
+              <p className="plano-descricao">5 aulas de ate 1 hora cada</p>
+              <ul className="plano-itens">
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas ao vivo e individuais via Zoom</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Gravacao de todas as aulas</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio completo em PDF</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte WhatsApp por 30 dias</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Checklist de lancamento de campanha</li>
+              </ul>
+              <a href="#" className="btn btn-cta">Comprar Agora</a>
+            </div>
+            <div className="plano-card fade-up">
+              <h3 className="plano-nome">Plano Master</h3>
+              <div className="plano-preco"><p className="plano-preco-antigo">De R$ 2.470,00</p><p className="plano-preco-atual"><span>R$</span> 1.897</p></div>
+              <p className="plano-descricao">10 aulas de ate 1 hora cada</p>
+              <ul className="plano-itens">
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Aulas ao vivo e individuais via Zoom</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Gravacao de todas as aulas</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Material de apoio completo em PDF</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Suporte WhatsApp por 60 dias</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Checklist + Templates de anuncios</li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Mentoria de acompanhamento no WhatsApp do grupo por ate 3 meses</li>
+              </ul>
+              <a href="#" className="btn btn-cta">Comprar Agora</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="section porque">
-  <div class="container">
-    <h2 class="section-title fade-up">Por Que Escolher as <span class="accent">Aulas Particulares</span></h2>
-    <div class="porque-grid">
-      <div class="porque-item fade-up">
-        <div class="porque-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
-        <h3 class="porque-titulo">Aprenda Rápido e Sem Enrolação</h3>
-        <p class="porque-texto">Metodologia focada no que realmente funciona. Sem teoria desnecessária, apenas prática aplicável ao seu negócio.</p>
-      </div>
-      <div class="porque-item fade-up">
-        <div class="porque-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div>
-        <h3 class="porque-titulo">Para Todos os Níveis</h3>
-        <p class="porque-texto">Do iniciante ao intermediário, as aulas se adaptam ao seu conhecimento atual e evoluem no seu ritmo.</p>
-      </div>
-      <div class="porque-item fade-up">
-        <div class="porque-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg></div>
-        <h3 class="porque-titulo">Transforme Conhecimento em Resultado</h3>
-        <p class="porque-texto">O objetivo é você sair gerando clientes e vendas. Tudo que ensinamos tem aplicação imediata no seu negócio.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <section className="section porque">
+        <div className="container">
+          <h2 className="section-title fade-up">Por Que Escolher as <span className="accent">Aulas Particulares</span></h2>
+          <div className="porque-grid">
+            <div className="porque-item fade-up">
+              <div className="porque-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
+              <h3 className="porque-titulo">Aprenda Rapido e Sem Enrolacao</h3>
+              <p className="porque-texto">Metodologia focada no que realmente funciona. Sem teoria desnecessaria, apenas pratica aplicavel ao seu negocio.</p>
+            </div>
+            <div className="porque-item fade-up">
+              <div className="porque-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div>
+              <h3 className="porque-titulo">Para Todos os Niveis</h3>
+              <p className="porque-texto">Do iniciante ao intermediario, as aulas se adaptam ao seu conhecimento atual e evoluem no seu ritmo.</p>
+            </div>
+            <div className="porque-item fade-up">
+              <div className="porque-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg></div>
+              <h3 className="porque-titulo">Transforme Conhecimento em Resultado</h3>
+              <p className="porque-texto">O objetivo e voce sair gerando clientes e vendas. Tudo que ensinamos tem aplicacao imediata no seu negocio.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="section garantia">
-  <div class="container">
-    <div class="garantia-content fade-up">
-      <div class="garantia-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
-      <h3 class="garantia-titulo">Garantia de 7 Dias</h3>
-      <p class="garantia-texto">Se após a primeira aula você sentir que o conteúdo não é para você, devolvemos 100% do seu investimento. Sem burocracia, sem perguntas. Estou tão confiante na metodologia que assumo todo o risco por você.</p>
-      <a href="#planos" class="btn btn-primary">Começar Agora com Garantia</a>
-    </div>
-  </div>
-</section>
+      <section className="section garantia">
+        <div className="container">
+          <div className="garantia-content fade-up">
+            <div className="garantia-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
+            <h3 className="garantia-titulo">Garantia de 7 Dias</h3>
+            <p className="garantia-texto">Se apos a primeira aula voce sentir que o conteudo nao e para voce, devolvemos 100% do seu investimento. Sem burocracia, sem perguntas. Estou tao confiante na metodologia que assumo todo o risco por voce.</p>
+            <a href="#planos" className="btn btn-primary">Comecar Agora com Garantia</a>
+          </div>
+        </div>
+      </section>
 
-<section id="sobre" class="section sobre">
-  <div class="container">
-    <div class="sobre-content">
-      <div class="foto-wrapper sobre-foto fade-up">
-        <div class="foto-placeholder" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8511.JPG-84nbMTzaacRf1SqVEFfdPLbMqQbZsl.jpeg'); background-size: cover; background-position: center 20%;"></div>
-      </div>
-      <div class="sobre-texto fade-up">
-        <h3>Quem é <span class="accent">Thaylon</span></h3>
-        <p>Especialista em tráfego pago com foco em Meta Ads e Google Ads, já ajudei dezenas de empreendedores, profissionais liberais e donos de negócio local a conquistarem autonomia na aquisição de clientes através de anúncios online.</p>
-        <p>Minha metodologia nasceu da prática real: anos gerenciando campanhas para diversos nichos me mostraram que o caminho mais rápido para resultados é o ensino individualizado, adaptado à realidade de cada aluno.</p>
-        <p>Acredito que qualquer pessoa pode aprender a rodar anúncios lucrativos quando tem o acompanhamento certo. Por isso, criei um formato de aulas particulares com suporte contínuo — para que você nunca fique travado em uma dúvida e possa aplicar tudo em tempo real no seu negócio.</p>
-        <p>Minha missão é simples: transferir o conhecimento necessário para que você nunca mais dependa de terceiros para gerar clientes e vendas.</p>
-        <a href="#planos" class="btn btn-primary">Quero Aprender com Thaylon</a>
-      </div>
-    </div>
-    <div class="platform-logos platform-logos-small fade-up" style="margin-top: 60px;">
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads">
-    </div>
-  </div>
-</section>
+      <section id="sobre" className="section sobre">
+        <div className="container">
+          <div className="sobre-content">
+            <div className="foto-wrapper sobre-foto fade-up">
+              <div className="foto-placeholder" style={{ backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8511.JPG-84nbMTzaacRf1SqVEFfdPLbMqQbZsl.jpeg')", backgroundSize: "cover", backgroundPosition: "center 20%" }}></div>
+            </div>
+            <div className="sobre-texto fade-up">
+              <h3>Quem e <span className="accent">Thaylon</span></h3>
+              <p>Especialista em trafego pago com foco em Meta Ads e Google Ads, ja ajudei dezenas de empreendedores, profissionais liberais e donos de negocio local a conquistarem autonomia na aquisicao de clientes atraves de anuncios online.</p>
+              <p>Minha metodologia nasceu da pratica real: anos gerenciando campanhas para diversos nichos me mostraram que o caminho mais rapido para resultados e o ensino individualizado, adaptado a realidade de cada aluno.</p>
+              <p>Acredito que qualquer pessoa pode aprender a rodar anuncios lucrativos quando tem o acompanhamento certo. Por isso, criei um formato de aulas particulares com suporte continuo — para que voce nunca fique travado em uma duvida e possa aplicar tudo em tempo real no seu negocio.</p>
+              <p>Minha missao e simples: transferir o conhecimento necessario para que voce nunca mais dependa de terceiros para gerar clientes e vendas.</p>
+              <a href="#planos" className="btn btn-primary">Quero Aprender com Thaylon</a>
+            </div>
+          </div>
+          <div className="platform-logos platform-logos-small fade-up" style={{ marginTop: "60px" }}>
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" className="meta-logo" />
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/google-ads-removebg-preview-A1xBXNvyDbrRNGDJWlw8lzKN05ELvQ.png" alt="Google Ads" />
+          </div>
+        </div>
+      </section>
 
-<div class="google-line google-line-full"></div>
+      <div className="google-line google-line-full"></div>
 
-<footer class="footer">
-  <div class="container footer-content">
-    <p class="footer-logo">Thaylon <span>|</span> Aulas Particulares</p>
-    <div class="footer-social">
-      <a href="https://www.instagram.com/thaylon.vieira___?igsh=MWQzbm03MGNwZjY2" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-      </a>
-      <a href="https://youtube.com/@atrioassessoria?si=toAyf5rmuoMUE8Ge" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-      </a>
-    </div>
-    <p class="footer-copy">© 2026 Thaylon. Todos os direitos reservados.</p>
-  </div>
-</footer>
-
-<script>
-const mobileToggle = document.querySelector('.mobile-toggle');
-const mobileMenu = document.querySelector('.mobile-menu');
-const mobileLinks = document.querySelectorAll('.mobile-menu-link');
-mobileToggle.addEventListener('click', () => { mobileMenu.classList.toggle('active'); });
-mobileLinks.forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('active'); }); });
-const fadeElements = document.querySelectorAll('.fade-up');
-const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-const fadeObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
-}, observerOptions);
-fadeElements.forEach(element => { fadeObserver.observe(element); });
-const header = document.querySelector('.header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) { header.style.backgroundColor = 'rgba(13, 17, 23, 0.98)'; }
-  else { header.style.backgroundColor = 'rgba(13, 17, 23, 0.95)'; }
-});
-</script>
-          `,
-        }}
-      />
-    </html>
+      <footer className="footer">
+        <div className="container footer-content">
+          <p className="footer-logo">Thaylon <span>|</span> Aulas Particulares</p>
+          <div className="footer-social">
+            <a href="https://www.instagram.com/thaylon.vieira___?igsh=MWQzbm03MGNwZjY2" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://youtube.com/@atrioassessoria?si=toAyf5rmuoMUE8Ge" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+          </div>
+          <p className="footer-copy">© 2026 Thaylon. Todos os direitos reservados.</p>
+        </div>
+      </footer>
+    </>
   )
 }
