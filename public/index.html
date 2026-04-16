@@ -130,21 +130,53 @@
       box-shadow: 0 10px 30px var(--cta-green-glow);
     }
 
-    /* Tira lateral Google Ads */
+    /* Tiras laterais Google Ads */
     .google-stripe {
       position: fixed;
       left: 0;
-      top: 50%;
-      transform: translateY(-50%);
       width: 5px;
-      height: 200px;
+      height: 180px;
       background: linear-gradient(180deg, var(--google-blue) 0%, var(--google-red) 33%, var(--google-yellow) 66%, var(--google-green) 100%);
       border-radius: 0 3px 3px 0;
       z-index: 999;
     }
 
+    .google-stripe-1 {
+      top: 15%;
+    }
+
+    .google-stripe-2 {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .google-stripe-3 {
+      bottom: 15%;
+    }
+
+    /* Tiras do lado direito */
+    .google-stripe-right {
+      position: fixed;
+      right: 0;
+      left: auto;
+      width: 5px;
+      height: 180px;
+      background: linear-gradient(180deg, var(--google-green) 0%, var(--google-yellow) 33%, var(--google-red) 66%, var(--google-blue) 100%);
+      border-radius: 3px 0 0 3px;
+      z-index: 999;
+    }
+
+    .google-stripe-right-1 {
+      top: 30%;
+    }
+
+    .google-stripe-right-2 {
+      top: 70%;
+    }
+
     @media (max-width: 768px) {
-      .google-stripe {
+      .google-stripe,
+      .google-stripe-right {
         display: none;
       }
     }
@@ -1044,8 +1076,12 @@
   <!-- ========================================
        HEADER / NAVEGAÇÃO
   ======================================== -->
-  <!-- Tira lateral Google Ads -->
-  <div class="google-stripe"></div>
+  <!-- Tiras laterais Google Ads -->
+  <div class="google-stripe google-stripe-1"></div>
+  <div class="google-stripe google-stripe-2"></div>
+  <div class="google-stripe google-stripe-3"></div>
+  <div class="google-stripe-right google-stripe-right-1"></div>
+  <div class="google-stripe-right google-stripe-right-2"></div>
 
   <header class="header">
     <div class="container header-content">
