@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -216,14 +217,19 @@
 
     @media (max-width: 600px) {
       .platform-logos {
-        gap: 25px;
-        margin: 20px 0;
+        gap: 30px;
+        margin: 20px auto 10px;
+        padding: 16px 24px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        width: fit-content;
       }
       .platform-logos img {
-        height: 35px;
+        height: 32px;
       }
       .platform-logos .meta-logo {
-        height: 42px;
+        height: 38px;
       }
       .platform-logos-small img {
         height: 28px;
@@ -526,11 +532,18 @@
 
     @media (max-width: 600px) {
       .hero-content {
-        gap: 15px;
+        gap: 20px;
+        flex-direction: column;
+        align-items: center;
       }
 
       .hero-text {
         padding: 0 5px;
+        order: 2;
+      }
+
+      .foto-wrapper {
+        order: 1;
       }
     }
 
@@ -1412,14 +1425,14 @@
         </ul>
         <a href="#planos" class="btn btn-primary">Quero Começar Agora</a>
       </div>
-      
-<!-- Foto do Thaylon -->
-  <div class="foto-wrapper fade-up">
-    <div class="foto-placeholder" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8404-ZxtqlfEbVELxRCwpIcaUSWvTHDow4K.jpg'); background-size: cover; background-position: center top;">
+
+      <!-- Foto do Thaylon -->
+      <div class="foto-wrapper fade-up">
+        <div class="foto-placeholder" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MULT8404-ZxtqlfEbVELxRCwpIcaUSWvTHDow4K.jpg'); background-size: cover; background-position: center top;">
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
-    
+
     <!-- Logos das plataformas -->
     <div class="platform-logos fade-up">
       <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Meta-Logo%20%281%29%20BRANCA-G9XljI1ScOiBs3WkGLdRmRKYNcpMiW.png" alt="Meta Ads" class="meta-logo">
